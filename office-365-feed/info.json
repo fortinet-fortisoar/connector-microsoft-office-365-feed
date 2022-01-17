@@ -1,0 +1,182 @@
+{
+  "name": "office-365-feed",
+  "label": "Office 365 Feed",
+  "version": "1.0.0",
+  "description": "Ingest the IP, URL indicators from the Office 365 feed.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Threat Intelligence",
+  "icon_small_name": "office365_feed_32x32.png",
+  "icon_large_name": "office365_feed_80x80.png",
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "help_online": "",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Regions",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "value": "Worldwide",
+        "options": ["China", "Germany", "USGovDoD","USGovGCCHigh","Worldwide"],
+        "description": "The regions from which to fetch indicators. Supports multi-select. For all regions, you need to select each region.\t",
+        "name": "regions"
+      },
+      {
+        "title": "Services",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "multiselect",
+        "value": "All",
+        "options": ["Common", "Exchange", "Sharepoint","Skype", "All"],
+        "description": "The services for which to fetch indicators. For all services, select the “All” option.",
+        "name": "services"
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True. ",
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "fetch_indicator",
+      "title": "Fetch Indicators",
+      "description": "Fetch an IP Address and URL indicator(s) from the Office 365 feeds. The web service is a read-only API provided by Microsoft to expose the URLs and IPs used by Office 365. The fetched indicators can be used to create a list (whitelist, blacklist, EDL, etc.) for your SIEM or firewall service to ingest and apply to its policy rules.",
+      "category": "investigation",
+      "annotation": "fetch_indicator",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Indicator Type",
+          "name": "indicator_type",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "IPs",
+            "URLs",
+            "Both"
+          ],
+          "description": "Type of indicator that you want to fetch from Office 365 feeds.Valid types include: IPs, URLs and Both."
+        },
+        {
+          "title": "Confidence",
+          "name": "confidence",
+          "type": "integer",
+          "tooltip": "Default Confidence score to be set for the feeds",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 50,
+          "validation": {
+            "minlength": 0,
+            "maxlength": 100
+          },
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "title": "Reputation",
+          "name": "reputation",
+          "type": "select",
+          "tooltip": "Default Reputation to be set for the feeds",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Good",
+            "Suspicious",
+            "Malicious",
+            "No Reputation Available",
+            "TBD"
+          ],
+          "value":
+            "Suspicious"
+        },
+        {
+          "title": "TLP",
+          "name": "tlp",
+          "type": "select",
+          "tooltip": "Default TLP to be set for the feeds",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Red",
+            "Amber",
+            "Green",
+            "White"
+          ],
+          "value": "White"
+        },
+        {
+          "title": "Maximum Age (in Days from Now)",
+          "name": "expiry",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 15,
+          "tooltip": "Default age for the feeds will be 15 days. User can extend it as per their need. The indicator will be marked expired on current time + expiry.",
+          "description": "Default age for the feeds will be 15 days. User can extend it as per their need. The indicator will be marked expired on current time + expiry."
+        },
+        {
+          "title": "Modified After",
+          "name": "last_pull_time",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "datetime",
+          "tooltip": "Value as an Epoch Timestamp. Indicators data will be returned only if the feed has been refreshed after this time.",
+          "description": "Value as an Epoch Timestamp. Indicators data will be returned only if the feed has been refreshed after this time."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "description": "(Optional) Control the number of indicators by limiting feeds count in a single request. Note: Pagination option is not available.",
+          "value": 10
+        }
+      ],
+      "output_schema": {
+        "lastUpdated": "",
+        "region": "",
+        "feedURL": "",
+        "indicators": [
+            {
+                "value": "",
+                "type": "",
+                "id": "",
+                "serviceArea": "",
+                "serviceAreaDisplayName": "",
+                "tcpPorts": "",
+                "expressRoute": "",
+                "category": "",
+                "required": "",
+                "tlp": "",
+                "confidence": "",
+                "reputation": "",
+                "validUntil": ""
+            }
+        ]
+    }
+    }
+  ]
+}
