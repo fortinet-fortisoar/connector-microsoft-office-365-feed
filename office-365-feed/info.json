@@ -1,8 +1,8 @@
 {
   "name": "office-365-feed",
-  "label": "Office 365 Feed",
+  "label": "Microsoft Office 365 Feed",
   "version": "1.0.0",
-  "description": "Ingest the IP, URL indicators from the Office 365 feed.",
+  "description": "Ingest the IP, URLs used by Office 365 using the web service provided by Microsoft. The fetched indicators can be used to create a whitelist, blacklist etc. for your SIEM or firewall service and apply to its policy rules.",
   "publisher": "Fortinet",
   "cs_approved": true,
   "cs_compatible": true,
@@ -12,6 +12,12 @@
   "ingestion_supported": true,
   "ingestion_modes": [
     "scheduled"
+  ],
+  "ingestion_preferences": {
+    "modules": ["threat_intel_feeds"]
+  },
+  "tags": [
+    "threatintel-inbound"
   ],
   "help_online": "",
   "configuration": {
@@ -54,7 +60,7 @@
     {
       "operation": "fetch_indicator",
       "title": "Fetch Indicators",
-      "description": "Fetch an IP Address and URL indicator(s) from the Office 365 feeds. The web service is a read-only API provided by Microsoft to expose the URLs and IPs used by Office 365. The fetched indicators can be used to create a list (whitelist, blacklist, EDL, etc.) for your SIEM or firewall service to ingest and apply to its policy rules.",
+      "description": "Fetch an IP Address and URL indicator(s) from the Office 365 feeds. The web service is a read-only API provided by Microsoft to expose the URLs and IPs used by Office 365. The fetched indicators can be used to create a whitelist, blacklist, EDL, etc. for your SIEM or firewall service to ingest and apply to its policy rules.",
       "category": "investigation",
       "annotation": "fetch_indicator",
       "enabled": true,
@@ -167,6 +173,7 @@
                 "serviceArea": "",
                 "serviceAreaDisplayName": "",
                 "tcpPorts": "",
+                "udpPorts": "",
                 "expressRoute": "",
                 "category": "",
                 "required": "",

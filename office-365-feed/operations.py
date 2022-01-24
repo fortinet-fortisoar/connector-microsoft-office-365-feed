@@ -19,16 +19,16 @@ logger = get_logger('office-365-feed')
 def ip_to_indicator_type(ip):
     # Returns the indicator type of the input IP.
     if re.match(ipv4cidrRegex, ip):
-        return INDICATOR_TYPE_MAP.get("IPv4 Address")
+        return "IPv4 Address"
 
     elif re.match(ipv4Regex, ip):
-        return INDICATOR_TYPE_MAP.get("IPv4 Address")
+        return "IPv4 Address"
 
     elif re.match(ipv6cidrRegex, ip):
-        return INDICATOR_TYPE_MAP.get("IPv6 Address")
+        return "IPv6 Address"
 
     elif re.match(ipv6Regex, ip):
-        return INDICATOR_TYPE_MAP.get("IPv6 Address")
+        return "IPv6 Address"
 
     else:
         return None
@@ -40,9 +40,9 @@ def check_indicator_type(indicator):
     if is_ip_indicator:
         return is_ip_indicator
     elif '*' in indicator:
-        return INDICATOR_TYPE_MAP.get("URL")
+        return "URL"
     else:
-        return INDICATOR_TYPE_MAP.get("URL")
+        return "URL"
 
 
 def convert_str_list(params):
@@ -64,29 +64,29 @@ def max_age(params):
         # Setting the default expiry time to 15 days from the indicator fetch time.
         return int(time.time()) + (15 * 86400)
 
-    
+
 def build_urls_dict(regions_list, services_list, unique_id, endpoint, latest_version_list=[]):
     try:
         urls_list = []
+        service = ','.join(map(str, services_list))
         for region in regions_list:
-            for service in services_list:
-                if service == 'All':
-                    url = 'https://endpoints.office.com/{0}/{1}?ClientRequestId={2}'.format(endpoint, region, unique_id)
-                else:
-                    url = 'https://endpoints.office.com/{0}/{1}?ServiceAreas={2}' \
-                          '&ClientRequestId={3}'.format(endpoint, region, service, unique_id)
+            if service == 'All':
+                url = 'https://endpoints.office.com/{0}/{1}?ClientRequestId={2}'.format(endpoint, region, unique_id)
+            else:
+                url = 'https://endpoints.office.com/{0}/{1}?ServiceAreas={2}' \
+                      '&ClientRequestId={3}'.format(endpoint, region, service, unique_id)
 
-                if latest_version_list:
-                    for dict_ in [x for x in latest_version_list if x["instance"] == region]:
-                        urls_list.append({'lastUpdated': dict_.get("latest"),
-                                          'region': region,
-                                          'feedURL': url,
-                                          })
-                else:
-                    urls_list.append({
-                        'region': region,
-                        'feedURL': url
-                    })
+            if latest_version_list:
+                for dict_ in [x for x in latest_version_list if x["instance"] == region]:
+                    urls_list.append({'lastUpdated': dict_.get("latest"),
+                                      'region': region,
+                                      'feedURL': url,
+                                      })
+            else:
+                urls_list.append({
+                    'region': region,
+                    'feedURL': url
+                })
 
         return urls_list
     except Exception as Err:
@@ -148,12 +148,33 @@ def fetch_last_updated_time(config, last_pull_time):
     for version in latest_version_list:
         if version["instance"] == region:
             latest_time = version["latest"]
-
-            old_version_ts = datetime.datetime.strptime(last_pull_time, "%Y-%m-%dT%H:%M:%SZ").timestamp()
-            latest_version_ts = datetime.datetime.strptime(latest_time, "%Y%m%d%H").timestamp()
+            try:
+                old_version_ts = datetime.datetime.strptime(str(last_pull_time), "%Y-%m-%dT%H:%M:%SZ").timestamp()
+            except:
+                old_version_ts = last_pull_time
+            latest_version_ts = int(datetime.datetime.strptime(latest_time, "%Y%m%d%H").timestamp())
             if old_version_ts < latest_version_ts:
-                return  True, latest_version_list
+                return True, latest_version_list
     return False, None
+
+
+def handle_dedup(iterable):
+    # Remove duplicate entries from result
+    try:
+        seen = set()
+        result = []
+
+        for dic in iterable:
+            key = (dic['value'])
+            if key in seen:
+                continue
+            result.append(dic)
+            seen.add(key)
+        return result
+
+    except Exception as Err:
+        logger.error(str(Err))
+        raise ConnectorError(str(Err))
 
 
 def build_response(indicator_fields, indicator_type_lower, limit=-1):
@@ -164,7 +185,7 @@ def build_response(indicator_fields, indicator_type_lower, limit=-1):
         if not indicator_type_lower == 'both':
             iterator = [i for i in iterator if indicator_type_lower in i]
         indicators = []
-        
+
         for item in iterator:
             if indicator_type_lower == 'both':
                 values = item.get('ips', []) + item.get('urls', [])
@@ -187,7 +208,8 @@ def build_response(indicator_fields, indicator_type_lower, limit=-1):
                     raw_data['validUntil'] = indicator_fields['validUntil'] if indicator_fields['validUntil'] else ""
                     indicators.append(raw_data)
 
-        result["indicators"] = indicators[:limit] if limit > 0 else indicators
+        unique_indicators = handle_dedup(indicators)
+        result["indicators"] = unique_indicators[:limit] if limit > 0 else unique_indicators
         return result
 
     except Exception as Err:
@@ -196,9 +218,6 @@ def build_response(indicator_fields, indicator_type_lower, limit=-1):
 
 
 def fetch_indicator(config, params):
-    """
-    PARSE AND VALIDATE INTEGRATION PARAMS
-    """
     try:
         last_pull_time = params.get("last_pull_time")
         if last_pull_time != "" and last_pull_time != None and last_pull_time != 0:
@@ -217,10 +236,10 @@ def fetch_indicator(config, params):
             indicator_fields['confidence'] = params.get("confidence") if params.get(
                 "confidence") is not None and params.get(
                 "confidence") != '' else 0
-            indicator_fields['reputation'] = REPUTATION_MAP.get(params.get("reputation")) if params.get(
-                'Suspicious') is not None and params.get("Suspicious") != '' else REPUTATION_MAP.get("Suspicious")
-            indicator_fields['tlp'] = TLP_MAP.get(params.get("tlp")) if params.get("tlp") is not None and params.get(
-                "tlp") != '' else TLP_MAP.get("White")
+            indicator_fields['reputation'] = params.get("reputation") if params.get(
+                'reputation') is not None and params.get("reputation") != '' else "TBD"
+            indicator_fields['tlp'] = params.get("tlp") if params.get("tlp") is not None and params.get(
+                "tlp") != '' else "White"
             indicator_fields['validUntil'] = max_age(params)
             indicator_type = str(params.get('indicator_type'))
             indicator_type_lower = indicator_type.lower()

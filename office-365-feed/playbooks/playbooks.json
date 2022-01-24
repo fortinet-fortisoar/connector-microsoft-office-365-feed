@@ -4,14 +4,15 @@
     {
       "@context": "/api/3/contexts/WorkflowCollection",
       "@type": "WorkflowCollection",
-      "name": "Sample - Office 365 Feed - 1.0.0",
-      "description": "Sample playbooks for \\\"Office 365 Feed\\\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "name": "Sample - Microsoft Office 365 Feed - 1.0.0",
+      "description": "Sample playbooks for \"Microsoft Office 365 Feed\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
       "visible": false,
-      "image": null,
-      "id": 710,
-      "createDate": 1637144856,
-      "modifyDate": 1637144856,
+      "image": "/api/3/images/4d589d62-06dc-4156-8402-9321febd6699",
+      "id": 38,
+      "createDate": 1643007224.313044,
+      "modifyDate": 1643007224.313044,
       "recordTags": [],
+      "deletedAt": null,
       "workflows": [
         {
           "@type": "Workflow",
@@ -29,7 +30,7 @@
           ],
           "synchronous": false,
           "lastModifyDate": 1642086249,
-          "collection": "/api/3/workflow_collections/c6283c88-0de4-49f6-8768-375a6a8af799",
+          "collection": "/api/3/workflow_collections/c4468567-68d9-416d-aaf5-727209d904b1",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/a8d633e4-5ee7-4e45-b8fb-d85d2430410a",
           "steps": [
@@ -50,7 +51,7 @@
               "left": "20",
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
               "uuid": "a8d633e4-5ee7-4e45-b8fb-d85d2430410a",
-              "id": 5547
+              "id": 729
             },
             {
               "@type": "WorkflowStep",
@@ -64,7 +65,7 @@
               "left": "740",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "uuid": "c9f83c33-f324-4d40-8693-f8b02105bf60",
-              "id": 5548
+              "id": 730
             },
             {
               "@type": "WorkflowStep",
@@ -95,7 +96,7 @@
               "left": "400",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "uuid": "3b45904d-6108-4b1d-b082-b7f18d8a0c04",
-              "id": 5549
+              "id": 731
             },
             {
               "@type": "WorkflowStep",
@@ -114,7 +115,7 @@
               "left": "20",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "uuid": "2bd493e3-8a71-4a22-8d7f-23268385d9c6",
-              "id": 5550
+              "id": 732
             },
             {
               "@type": "WorkflowStep",
@@ -135,7 +136,7 @@
               "left": "20",
               "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
               "uuid": "5dc8a8cf-dccf-46e7-ad6d-3ddf5d750796",
-              "id": 5551
+              "id": 733
             },
             {
               "@type": "WorkflowStep",
@@ -149,7 +150,7 @@
               "left": "420",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "uuid": "1725c9c2-e24b-47a5-a41e-e875c7eb5933",
-              "id": 5552
+              "id": 734
             }
           ],
           "routes": [
@@ -206,11 +207,11 @@
             "fetch",
             "office-365-feed"
           ],
-          "id": 1312,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1642083027.523007,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1642086258.477648,
+          "id": 155,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1643007224.315268,
+          "modifyUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "modifyDate": 1643007224.315268,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null
@@ -229,7 +230,7 @@
           "parameters": [],
           "synchronous": false,
           "lastModifyDate": 1642086004,
-          "collection": "/api/3/workflow_collections/c6283c88-0de4-49f6-8768-375a6a8af799",
+          "collection": "/api/3/workflow_collections/c4468567-68d9-416d-aaf5-727209d904b1",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/9705bee0-6f13-4849-ae1d-9c5e05bb5694",
           "steps": [
@@ -253,7 +254,7 @@
               "left": "420",
               "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
               "uuid": "fd4fbe82-bd29-4fe2-84d3-17a2ae315a97",
-              "id": 5553
+              "id": 735
             },
             {
               "@type": "WorkflowStep",
@@ -272,7 +273,7 @@
               "left": "300",
               "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
               "uuid": "affa5f6d-31e1-4463-a638-c23d9fcc3c11",
-              "id": 5554
+              "id": 736
             },
             {
               "@type": "WorkflowStep",
@@ -286,7 +287,7 @@
               "left": "33",
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
               "uuid": "9705bee0-6f13-4849-ae1d-9c5e05bb5694",
-              "id": 5555
+              "id": 737
             },
             {
               "@type": "WorkflowStep",
@@ -301,7 +302,7 @@
               "left": "80",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "uuid": "2a5fb65f-5d9a-4fe5-a66a-15c9d64171c7",
-              "id": 5556
+              "id": 738
             },
             {
               "@type": "WorkflowStep",
@@ -324,7 +325,7 @@
               "left": "140",
               "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
               "uuid": "3e9dec91-ab52-4f03-9741-d17e54876ad7",
-              "id": 5557
+              "id": 739
             },
             {
               "@type": "WorkflowStep",
@@ -338,7 +339,7 @@
               "left": "220",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "uuid": "23b666b8-37a9-4ff3-ab6e-a83eb21a5994",
-              "id": 5558
+              "id": 740
             },
             {
               "@type": "WorkflowStep",
@@ -376,7 +377,7 @@
               "left": "360",
               "stepType": "/api/3/workflow_step_types/7b221880-716b-4726-a2ca-5e568d330b3e",
               "uuid": "e8ac50de-dc2a-4e24-b724-4c54f869dc49",
-              "id": 5559
+              "id": 741
             }
           ],
           "routes": [
@@ -443,11 +444,11 @@
             "ingest",
             "office-365-feed"
           ],
-          "id": 1313,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1642083027.782665,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1642086258.543178,
+          "id": 156,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1643007224.318512,
+          "modifyUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "modifyDate": 1643007224.318512,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null
@@ -460,12 +461,13 @@
           "tag": "#Office 365 Feed",
           "description": "Fetch an IP Address and URL indicator(s) from the Office 365 feeds. The web service is a read-only API provided by Microsoft to expose the URLs and IPs used by Office 365. The fetched indicators can be used to create a list (whitelist, blacklist, EDL, etc.) for your SIEM or firewall service to ingest and apply to its policy rules.",
           "isActive": false,
+          "debug": false,
           "singleRecordExecution": false,
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
           "lastModifyDate": 1637151798,
-          "collection": "/api/3/workflow_collections/07b3fcd7-6d02-4bec-81dc-2da89dfc4ecf",
+          "collection": "/api/3/workflow_collections/c4468567-68d9-416d-aaf5-727209d904b1",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/f6915004-74e5-4420-87a2-85920526af1d",
           "steps": [
@@ -494,7 +496,7 @@
               "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "uuid": "7ac229e5-9b28-4875-81cf-6330b2a2dd1c",
-              "id": 19467
+              "id": 742
             },
             {
               "@type": "WorkflowStep",
@@ -520,7 +522,7 @@
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
               "uuid": "f6915004-74e5-4420-87a2-85920526af1d",
-              "id": 19442
+              "id": 743
             }
           ],
           "routes": [
@@ -540,23 +542,24 @@
             "Microsoft",
             "office-365-feed"
           ],
-          "id": 6813,
+          "id": 157,
           "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
-          "createDate": 1637144827,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1637151798,
+          "createDate": 1643007224.320343,
+          "modifyUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "modifyDate": 1643007224.320343,
           "owners": [],
-          "isPrivate": false
+          "isPrivate": false,
+          "deletedAt": null
         }
       ]
     }
   ],
   "exported_tags": [
-    "Microsoft",
     "dataingestion",
+    "fetch",
     "office-365-feed",
     "create",
     "ingest",
-    "fetch"
+    "Microsoft"
   ]
 }
