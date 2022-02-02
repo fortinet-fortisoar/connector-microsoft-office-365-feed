@@ -81,72 +81,6 @@
             },
             {
               "@type": "WorkflowStep",
-              "name": "Collect Feeds Lists",
-              "description": null,
-              "arguments": {
-                "data": "{{vars.steps.Fetch_Indicators.data.indicators}}"
-              },
-              "status": null,
-              "top": "580",
-              "left": "980",
-              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-              "uuid": "2dfd8705-9cd2-4228-b672-cc761415fed4",
-              "id": 1776
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Return Sample Data",
-              "description": null,
-              "arguments": {
-                "data": "[\n  {\n    \"value\": \"51.4.68.0/26\",\n    \"type\": \"IPv4 Address\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\",\n    \"required\": true\n  },\n  {\n    \"value\": \"2a01:4180:4040:1::/64\",\n    \"type\": \"IPv6 Address\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\",\n    \"required\": true\n  },\n  {\n    \"value\": \"2a01:4180:4040:2::/64\",\n    \"type\": \"IPv6 Address\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\",\n    \"required\": true\n  },\n  {\n    \"value\": \"*.germeetings.skype.de\",\n    \"type\": \"URL\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\",\n    \"required\": true\n  },\n  {\n    \"value\": \"*.infra.skype.de\",\n    \"type\": \"URL\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\"\n  },\n  {\n    \"value\": \"*.online.skype.de\",\n    \"type\": \"URL\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\",\n    \"required\": true\n  }\n]"
-              },
-              "status": null,
-              "top": "300",
-              "left": "680",
-              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-              "uuid": "4590a961-cc9f-48ea-b25c-aaf25dacf336",
-              "id": 1779
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Create Record",
-              "description": null,
-              "arguments": {
-                "when": "{{vars.data | length > 0}}",
-                "for_each": {
-                  "item": "{{vars.data}}",
-                  "__bulk": true,
-                  "parallel": false,
-                  "condition": "",
-                  "batch_size": 100
-                },
-                "resource": {
-                  "tLP": "{{vars.tlp_resolved}}",
-                  "value": "{{vars.item.value}}",
-                  "source": "Microsoft Office 365 Feed",
-                  "created": "{{arrow.now()}}",
-                  "__replace": "",
-                  "expiresOn": "{% if vars.expiry %}{{ arrow.now().int_timestamp + (vars.expiry | int)*24*60*60 }}{% else %}None{% endif %}",
-                  "confidence": "{{vars.confidence}}",
-                  "reputation": "{{vars.reputation_resolved}}",
-                  "sourceData": "{{ vars.item | toJSON }}",
-                  "typeOfFeed": "{{vars.item[\"type\"] | resolveRange(vars.threat_intelligence_typeofindicator_map1)}}",
-                  "validUntil": "{% if vars.expiry %}{{ arrow.now().int_timestamp + (vars.expiry | int)*24*60*60 }}{% else %}None{% endif %}"
-                },
-                "_showJson": false,
-                "collection": "/api/ingest-feeds/threat_intel_feeds",
-                "__recommend": [],
-                "step_variables": []
-              },
-              "status": null,
-              "top": "580",
-              "left": "1300",
-              "stepType": "/api/3/workflow_step_types/7b221880-716b-4726-a2ca-5e568d330b3e",
-              "uuid": "6af1f771-00aa-4b47-a3cb-f0a42fa282fb",
-              "id": 1780
-            },
-            {
-              "@type": "WorkflowStep",
               "name": "Resolve Range",
               "description": null,
               "arguments": {
@@ -159,6 +93,20 @@
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "uuid": "d3492426-c7d7-42f2-b4b3-f32e6275e26d",
               "id": 1778
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Collect Feeds Lists",
+              "description": null,
+              "arguments": {
+                "data": "{{vars.steps.Fetch_Indicators.data.indicators}}"
+              },
+              "status": null,
+              "top": "580",
+              "left": "980",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "2dfd8705-9cd2-4228-b672-cc761415fed4",
+              "id": 1776
             },
             {
               "@type": "WorkflowStep",
@@ -211,27 +159,61 @@
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "uuid": "fe4fe7a0-45c7-47f8-8c6b-629e6269ddd7",
               "id": 1781
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Record",
+              "description": null,
+              "arguments": {
+                "when": "{{vars.data | length > 0}}",
+                "for_each": {
+                  "item": "{{vars.data}}",
+                  "__bulk": true,
+                  "parallel": false,
+                  "condition": "",
+                  "batch_size": 100
+                },
+                "resource": {
+                  "tLP": "{{vars.tlp_resolved}}",
+                  "value": "{{vars.item.value}}",
+                  "source": "Microsoft Office 365 Feed",
+                  "created": "{{arrow.now()}}",
+                  "__replace": "",
+                  "expiresOn": "{% if vars.expiry %}{{ arrow.now().int_timestamp + (vars.expiry | int)*24*60*60 }}{% else %}None{% endif %}",
+                  "confidence": "{{vars.confidence}}",
+                  "reputation": "{{vars.reputation_resolved}}",
+                  "sourceData": "{{ vars.item | toJSON }}",
+                  "typeOfFeed": "{{vars.item[\"type\"] | resolveRange(vars.threat_intelligence_typeofindicator_map1)}}",
+                  "validUntil": "{% if vars.expiry %}{{ arrow.now().int_timestamp + (vars.expiry | int)*24*60*60 }}{% else %}None{% endif %}"
+                },
+                "_showJson": false,
+                "collection": "/api/ingest-feeds/threat_intel_feeds",
+                "__recommend": [],
+                "step_variables": []
+              },
+              "status": null,
+              "top": "580",
+              "left": "1300",
+              "stepType": "/api/3/workflow_step_types/7b221880-716b-4726-a2ca-5e568d330b3e",
+              "uuid": "6af1f771-00aa-4b47-a3cb-f0a42fa282fb",
+              "id": 1780
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Return Sample Data",
+              "description": null,
+              "arguments": {
+                "data": "[\n  {\n    \"value\": \"51.4.68.0/26\",\n    \"type\": \"IPv4 Address\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\",\n    \"required\": true\n  },\n  {\n    \"value\": \"2a01:4180:4040:1::/64\",\n    \"type\": \"IPv6 Address\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\",\n    \"required\": true\n  },\n  {\n    \"value\": \"2a01:4180:4040:2::/64\",\n    \"type\": \"IPv6 Address\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\",\n    \"required\": true\n  },\n  {\n    \"value\": \"*.germeetings.skype.de\",\n    \"type\": \"URL\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\",\n    \"required\": true\n  },\n  {\n    \"value\": \"*.infra.skype.de\",\n    \"type\": \"URL\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\"\n  },\n  {\n    \"value\": \"*.online.skype.de\",\n    \"type\": \"URL\",\n    \"id\": 6,\n    \"serviceArea\": \"Skype\",\n    \"serviceAreaDisplayName\": \"Skype for Business Online and Microsoft Teams\",\n    \"tcpPorts\": \"80,443\",\n    \"udpPorts\": \"3478\",\n    \"expressRoute\": false,\n    \"category\": \"Optimize\",\n    \"required\": true\n  }\n]"
+              },
+              "status": null,
+              "top": "300",
+              "left": "680",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "4590a961-cc9f-48ea-b25c-aaf25dacf336",
+              "id": 1779
             }
           ],
           "routes": [
-            {
-              "@type": "WorkflowRoute",
-              "name": "Collect Feeds Lists -> Create Record",
-              "targetStep": "/api/3/workflow_steps/6af1f771-00aa-4b47-a3cb-f0a42fa282fb",
-              "sourceStep": "/api/3/workflow_steps/2dfd8705-9cd2-4228-b672-cc761415fed4",
-              "label": null,
-              "isExecuted": false,
-              "uuid": "1f334e25-5d1e-4547-a348-dd5385927656"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "name": "Fetch Indicators -> Collect Feeds Lists",
-              "targetStep": "/api/3/workflow_steps/2dfd8705-9cd2-4228-b672-cc761415fed4",
-              "sourceStep": "/api/3/workflow_steps/12868bab-4393-4add-92bf-38ff251cba30",
-              "label": null,
-              "isExecuted": false,
-              "uuid": "1f599f95-b4d3-4a19-9f8c-789c34e35e1f"
-            },
             {
               "@type": "WorkflowRoute",
               "name": "Configuration -> Resolve Range",
@@ -261,21 +243,39 @@
             },
             {
               "@type": "WorkflowRoute",
-              "name": "Resolve Range -> Is Data Only For mapping",
-              "targetStep": "/api/3/workflow_steps/eaf30abc-a726-4394-8a03-80a0ec0729c2",
-              "sourceStep": "/api/3/workflow_steps/d3492426-c7d7-42f2-b4b3-f32e6275e26d",
-              "label": null,
-              "isExecuted": false,
-              "uuid": "70ac50bb-76af-461f-a1ee-daf55815de46"
-            },
-            {
-              "@type": "WorkflowRoute",
               "name": "Is Data Only For mapping -> Fetch Indicators",
               "targetStep": "/api/3/workflow_steps/12868bab-4393-4add-92bf-38ff251cba30",
               "sourceStep": "/api/3/workflow_steps/eaf30abc-a726-4394-8a03-80a0ec0729c2",
               "label": "No,For Ingestion",
               "isExecuted": false,
               "uuid": "ee17286f-0898-435d-a899-59e6ee77e34c"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Collect Feeds Lists -> Create Record",
+              "targetStep": "/api/3/workflow_steps/6af1f771-00aa-4b47-a3cb-f0a42fa282fb",
+              "sourceStep": "/api/3/workflow_steps/2dfd8705-9cd2-4228-b672-cc761415fed4",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "1f334e25-5d1e-4547-a348-dd5385927656"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Indicators -> Collect Feeds Lists",
+              "targetStep": "/api/3/workflow_steps/2dfd8705-9cd2-4228-b672-cc761415fed4",
+              "sourceStep": "/api/3/workflow_steps/12868bab-4393-4add-92bf-38ff251cba30",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "1f599f95-b4d3-4a19-9f8c-789c34e35e1f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Resolve Range -> Is Data Only For mapping",
+              "targetStep": "/api/3/workflow_steps/eaf30abc-a726-4394-8a03-80a0ec0729c2",
+              "sourceStep": "/api/3/workflow_steps/d3492426-c7d7-42f2-b4b3-f32e6275e26d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "70ac50bb-76af-461f-a1ee-daf55815de46"
             }
           ],
           "priority": null,
@@ -337,22 +337,17 @@
             },
             {
               "@type": "WorkflowStep",
-              "name": "Fetch and Create",
+              "name": "Extract Value From Response",
               "description": null,
               "arguments": {
-                "arguments": {
-                  "last_pull_time": "{{vars.last_pull_time}}"
-                },
-                "apply_async": false,
-                "step_variables": [],
-                "workflowReference": "/api/3/workflows/353d808e-8a9f-4d5d-b0ff-964bf3b6166c"
+                "last_pull_time": "{% if (vars.steps.Get_Macro_Value.data[\"hydra:member\"] | length) > 0%}{{vars.steps.Get_Macro_Value.data[\"hydra:member\"][0].value }}{% else %}0{% endif %}"
               },
               "status": null,
-              "top": "380",
-              "left": "720",
-              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
-              "uuid": "225050ad-8108-453d-b5c3-896b5c443378",
-              "id": 1788
+              "top": "280",
+              "left": "560",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "4d3cecec-9ae5-4c4e-806e-178271f36675",
+              "id": 1784
             },
             {
               "@type": "WorkflowStep",
@@ -367,6 +362,24 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
               "uuid": "25e56e64-2b2d-4887-82ee-3bc2c04dd4a5",
               "id": 1785
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "fetchTime": "{{arrow.utcnow().int_timestamp}}",
+                "pullTimeMacro": "office365FeedLastPullTime_{{vars['audit_info']['cyops_playbook_iri'].split('/')[-1].replace('-','_')}}",
+                "threat_intel_feeds_tLP_map": "{}",
+                "threat_intel_feeds_reputation_map": "{}",
+                "threat_intel_feeds_typeOfFeed_map": "{'/api/3/picklists/b788efc2-dadb-4448-9018-043b37266de4': {{'ThreatIntelFeedType'| picklist('IPv4 Address') }}, '/api/3/picklists/b788efc2-dadb-4448-9018-043b37266de4': {{'ThreatIntelFeedType'| picklist('IPv6 Address') }}, '/api/3/picklists/76b68a66-ffaa-4003-b60d-a43fcc64c003': {{'ThreatIntelFeedType'| picklist('URL') }}}"
+              },
+              "status": null,
+              "top": "100",
+              "left": "220",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "4ab526c2-1604-486c-9bca-bee04c1ae6aa",
+              "id": 1786
             },
             {
               "@type": "WorkflowStep",
@@ -393,46 +406,42 @@
             },
             {
               "@type": "WorkflowStep",
-              "name": "Configuration",
+              "name": "Fetch and Create",
               "description": null,
               "arguments": {
-                "fetchTime": "{{arrow.utcnow().int_timestamp}}",
-                "pullTimeMacro": "office365FeedLastPullTime_{{vars['audit_info']['cyops_playbook_iri'].split('/')[-1].replace('-','_')}}",
-                "threat_intel_feeds_tLP_map": "{}",
-                "threat_intel_feeds_reputation_map": "{}",
-                "threat_intel_feeds_typeOfFeed_map": "{'/api/3/picklists/b788efc2-dadb-4448-9018-043b37266de4': {{'ThreatIntelFeedType'| picklist('IPv4 Address') }}, '/api/3/picklists/b788efc2-dadb-4448-9018-043b37266de4': {{'ThreatIntelFeedType'| picklist('IPv6 Address') }}, '/api/3/picklists/76b68a66-ffaa-4003-b60d-a43fcc64c003': {{'ThreatIntelFeedType'| picklist('URL') }}}"
+                "arguments": {
+                  "last_pull_time": "{{vars.last_pull_time}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "/api/3/workflows/353d808e-8a9f-4d5d-b0ff-964bf3b6166c"
               },
               "status": null,
-              "top": "100",
-              "left": "220",
-              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-              "uuid": "4ab526c2-1604-486c-9bca-bee04c1ae6aa",
-              "id": 1786
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Extract Value From Response",
-              "description": null,
-              "arguments": {
-                "last_pull_time": "{% if (vars.steps.Get_Macro_Value.data[\"hydra:member\"] | length) > 0%}{{vars.steps.Get_Macro_Value.data[\"hydra:member\"][0].value }}{% else %}0{% endif %}"
-              },
-              "status": null,
-              "top": "280",
-              "left": "560",
-              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-              "uuid": "4d3cecec-9ae5-4c4e-806e-178271f36675",
-              "id": 1784
+              "top": "380",
+              "left": "720",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "uuid": "225050ad-8108-453d-b5c3-896b5c443378",
+              "id": 1788
             }
           ],
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "name": "Start -> Configuration",
-              "targetStep": "/api/3/workflow_steps/4ab526c2-1604-486c-9bca-bee04c1ae6aa",
-              "sourceStep": "/api/3/workflow_steps/25e56e64-2b2d-4887-82ee-3bc2c04dd4a5",
+              "name": "Configuration -> Get Macro Value",
+              "targetStep": "/api/3/workflow_steps/263df5d9-2796-4360-aa23-596cb83b7ed0",
+              "sourceStep": "/api/3/workflow_steps/4ab526c2-1604-486c-9bca-bee04c1ae6aa",
               "label": null,
               "isExecuted": false,
-              "uuid": "4822cc96-aeea-4edb-a165-ef9dfeb06939"
+              "uuid": "858bafd0-0423-4b2a-8660-e0f9a343b002"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Macro Value -> Extract Value From Response",
+              "targetStep": "/api/3/workflow_steps/4d3cecec-9ae5-4c4e-806e-178271f36675",
+              "sourceStep": "/api/3/workflow_steps/263df5d9-2796-4360-aa23-596cb83b7ed0",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e149ac0b-e72d-4715-87a3-d8720e77b2e0"
             },
             {
               "@type": "WorkflowRoute",
@@ -445,12 +454,12 @@
             },
             {
               "@type": "WorkflowRoute",
-              "name": "Configuration -> Get Macro Value",
-              "targetStep": "/api/3/workflow_steps/263df5d9-2796-4360-aa23-596cb83b7ed0",
-              "sourceStep": "/api/3/workflow_steps/4ab526c2-1604-486c-9bca-bee04c1ae6aa",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/4ab526c2-1604-486c-9bca-bee04c1ae6aa",
+              "sourceStep": "/api/3/workflow_steps/25e56e64-2b2d-4887-82ee-3bc2c04dd4a5",
               "label": null,
               "isExecuted": false,
-              "uuid": "858bafd0-0423-4b2a-8660-e0f9a343b002"
+              "uuid": "4822cc96-aeea-4edb-a165-ef9dfeb06939"
             },
             {
               "@type": "WorkflowRoute",
@@ -460,15 +469,6 @@
               "label": null,
               "isExecuted": false,
               "uuid": "ae621df3-b677-4e11-b08e-5abab7735e77"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "name": "Get Macro Value -> Extract Value From Response",
-              "targetStep": "/api/3/workflow_steps/4d3cecec-9ae5-4c4e-806e-178271f36675",
-              "sourceStep": "/api/3/workflow_steps/263df5d9-2796-4360-aa23-596cb83b7ed0",
-              "label": null,
-              "isExecuted": false,
-              "uuid": "e149ac0b-e72d-4715-87a3-d8720e77b2e0"
             }
           ],
           "priority": null,
@@ -495,13 +495,13 @@
           "tag": "#Microsoft Office 365 Feed",
           "description": "Fetch an IP Address and URL indicator(s) from the Office 365 feeds. The web service is a read-only API provided by Microsoft to expose the URLs and IPs used by Office 365. The fetched indicators can be used to create a list (whitelist, blacklist, EDL, etc.) for your SIEM or firewall service to ingest and apply to its policy rules.",
           "isActive": false,
-          "debug": true,
+          "debug": false,
           "singleRecordExecution": false,
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
           "lastModifyDate": 1643629486,
-          "collection": "/api/3/workflow_collections/59e2c4d7-fe92-4765-9ba3-27d1fa13d239",
+          "collection": "/api/3/workflow_collections/1918e18d-3f09-4c89-8e2b-14a1d7412337",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/f6915004-74e5-4420-87a2-85920526af1d",
           "steps": [
@@ -529,7 +529,7 @@
               "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "uuid": "1a5a3099-6c18-4639-9e67-d74f6b705a43",
-              "id": 1372
+              "id": 1773
             },
             {
               "@type": "WorkflowStep",
@@ -557,7 +557,7 @@
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
               "uuid": "f6915004-74e5-4420-87a2-85920526af1d",
-              "id": 1371
+              "id": 1774
             }
           ],
           "routes": [
@@ -577,11 +577,11 @@
             "Microsoft",
             "microsoft-office-365-feed"
           ],
-          "id": 294,
+          "id": 361,
           "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
-          "createDate": 1643628861.085212,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1643629487.947019,
+          "createDate": 1643729392.483892,
+          "modifyUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "modifyDate": 1643729392.483892,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null
