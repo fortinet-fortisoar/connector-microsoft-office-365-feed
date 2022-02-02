@@ -60,13 +60,28 @@ def make_api_call(params):
                     url=feed_url,
                     verify=params.get('verify_ssl')
                 )
-                response.raise_for_status()
-                data = response.json()
-                if "latest" in data:
-                    result.append(data)
+                if response.status_code == 400:
+                    """
+                    In case the specified region has no indicators then url with servicearea fails with 400 status code
+                    to handle this condition we double check with only region url.
+                    """
+                    parsed_url = urlparse(feed_url)
+                    captured_value = parse_qs(parsed_url.query)
+                    url = parsed_url.scheme + "://" + parsed_url.hostname + parsed_url.path + "?ClientRequestId=" + \
+                          captured_value['ClientRequestId'][0]
+                    response = requests.get(
+                        url=url,
+                        verify=params.get('verify_ssl')
+                    )
+                if response.status_code == 200:
+                    data = response.json()
+                    if "latest" in data:
+                        result.append(data)
+                    else:
+                        indicators = [i for i in data if 'ips' in i or 'urls' in i]  # filter empty entries
+                        result.extend(indicators)
                 else:
-                    indicators = [i for i in data if 'ips' in i or 'urls' in i]  # filter empty entries
-                    result.extend(indicators)
+                    response.raise_for_status()
             except requests.exceptions.SSLError:
                 logger.error('An SSL error occurred.')
                 raise ConnectorError('An SSL error occurred.')
