@@ -14,7 +14,7 @@
     "scheduled"
   ],
   "ingestion_preferences": {
-    "modules": ["threat_intel_feeds"]
+    "modules": ["threat_intel_feeds", "indicators"]
   },
   "tags": [
     "threatintel-inbound"
