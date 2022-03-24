@@ -17,7 +17,7 @@
     "modules": ["threat_intel_feeds", "indicators"]
   },
   "tags": [
-    "threatintel-inbound"
+    "ThreatIntel"
   ],
   "help_online": "",
   "configuration": {
