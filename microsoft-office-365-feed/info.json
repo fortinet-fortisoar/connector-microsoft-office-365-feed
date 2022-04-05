@@ -19,7 +19,7 @@
   "tags": [
     "ThreatIntel"
   ],
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/microsoft-office-365-feed/245/microsoft-office-365-feed-v1-0-0",
   "configuration": {
     "fields": [
       {
@@ -30,7 +30,7 @@
         "type": "select",
         "value": "Worldwide",
         "options": ["China", "Germany", "USGovDoD","USGovGCCHigh","Worldwide"],
-        "description": "The regions from which to fetch indicators. Supports multi-select. For all regions, you need to select each region.\t",
+        "description": "Select the regions from where you want to fetch indicators. You can select multiple regions. If you want to retrieve indicators from all regions, then you need to individually select each region.",
         "name": "regions"
       },
       {
@@ -41,7 +41,7 @@
         "type": "multiselect",
         "value": "All",
         "options": ["Common", "Exchange", "Sharepoint","Skype", "All"],
-        "description": "The services for which to fetch indicators. For all services, select the “All” option.",
+        "description": "Select the services for which you want to fetch indicators. If you want to retrieve indicators for all services, select the “All” option.",
         "name": "services"
       },
       {
@@ -60,7 +60,7 @@
     {
       "operation": "fetch_indicator",
       "title": "Fetch Indicators",
-      "description": "Fetch an IP Address and URL indicator(s) from the Microsoft Office 365 feeds.",
+      "description": "Fetch indicators for an IP Address or a URL or both from the Microsoft Office 365 Feeds.",
       "category": "investigation",
       "annotation": "fetch_indicators",
       "enabled": true,
@@ -77,7 +77,7 @@
             "URLs",
             "Both"
           ],
-          "description": "Type of indicator that you want to fetch from Office 365 feeds.Valid types include: IPs, URLs and Both."
+          "description": "Select the type of indicator that you want to fetch from Office 365 Feeds. You can choose from the following options: IPs, URLs, or Both."
         },
         {
           "title": "Modified After",
@@ -87,7 +87,7 @@
           "editable": true,
           "type": "datetime",
           "tooltip": "Value as an Epoch Timestamp. Indicators data will be returned only if the feed has been refreshed after this time.",
-          "description": "Value as an Epoch Timestamp. Indicators data will be returned only if the feed has been refreshed after this time."
+          "description": "(Optional) Specify the value as an Epoch Timestamp. Specify the time the feeds were last pulled from Microsoft Office 365 Feeds. In this case, the indicators will be returned from Microsoft Office 365 Feeds only if the feed has been refreshed after the specified time. This is used in scheduled data ingestion to fetch feeds incrementally since the last successful pull."
         },
         {
           "title": "Limit",
@@ -96,7 +96,7 @@
           "visible": true,
           "type": "integer",
           "name": "limit",
-          "description": "(Optional) Control the number of indicators by limiting feeds count in a single request. Note: Pagination option is not available.",
+          "description": "(Optional) Specify the maximum number of indicators that should be returned in a single required. This controls the number of indicators by limiting feeds count in a single request. Note: The option of Pagination is not available.",
           "value": 10
         }
       ],
