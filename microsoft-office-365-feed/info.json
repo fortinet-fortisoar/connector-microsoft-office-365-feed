@@ -2,7 +2,7 @@
   "name": "microsoft-office-365-feed",
   "label": "Microsoft Office 365 Feed",
   "version": "1.0.0",
-  "description": "Ingest the IP, URLs used by Office 365 using the web service provided by Microsoft. The fetched indicators can be used to create a whitelist, blacklist etc. for your SIEM or firewall services.\\nThis connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
+  "description": "Ingest the IP, URLs used by Office 365 using the web service provided by Microsoft. The fetched indicators can be used to create a whitelist, blacklist etc. for your SIEM or firewall services.<br/><br/>This connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
   "publisher": "Fortinet",
   "cs_approved": true,
   "cs_compatible": true,
